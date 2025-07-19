@@ -12,6 +12,8 @@
 > 
 > **Please share a $\color{orange} STAR$ ⭐ if this project does help**
 
+![Chat](assets/chat_page.jpg)
+
 
 ## 📢 Latest Updates
 * **July-20-2025:** 🎉 ${\color{red} First\ KokoroMate \ update!}$
