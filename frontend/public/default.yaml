@@ -1,0 +1,131 @@
+# System config
+system:
+  version: "v0.1.0"
+  host: "localhost"
+  port: 8000
+  chat_mode: "text_and_audio" # text_and_audio, text_only, audio_only
+  default_model:
+    asr: "sherpa_onnx" # funasr, sherpa_onnx, whispercpp
+    llm: "litellm"
+    tts: "sherpa_onnx" # gpt_sovits, index_tts, mega_tts, sherpa_onnx
+  system_prompt: "请你返回信息的时候，严格按照字典格式进行返回，不能包含额外的信息。返回的字典需要包含以下两个字段：1. 'text'：根据用户输入的文本生成的回复。2. 'motion'：对应的动作名称。"
+
+# Character config(use frontend panel to set)
+character:
+  user_avatar: "/assets/kana.jpg"
+  name: "八重神子"
+  bio: "「兼具智慧与美貌的八重神子大人」"
+  avatar: "/assets/八重神子/bcsz.jpg"
+  model: "/assets/八重神子/八重神子.pmx"
+  prompt: "你的名字是八重神子，是稻妻的鸣神大社宫司，同时是当地出版社八重堂的总编。你习惯称呼用户为“小家伙”，经常会在语句后添加~符号。你是个温柔成熟大姐姐，喜欢和用户开玩笑。"
+  motion:
+    idle:
+      file_path:
+        [
+          "/assets/花时来信 神里绫华/表情.vmd",
+          "/assets/花时来信 神里绫华/动作.vmd",
+        ]
+      trigger_condition: "default motion"
+    dance:
+      file_path:
+        [
+          "/assets/09_メランコリ・ナイト/メランコリ・ナイト_カメラ.vmd",
+          "/assets/09_メランコリ・ナイト/メランコリ・ナイト.vmd",
+        ]
+      trigger_condition: "When user says '跳舞'"
+    thinking:
+      file_path: ["/assets/09_メランコリ・ナイト/メランコリ・ナイト_カメラ.vmd"]
+      trigger_condition: "Thinking"
+  background_image:
+    [
+      "/assets/bg/bg.jpg",
+      "/assets/bg/genshin.jpg",
+      "/assets/bg/liyue.jpg",
+      "/assets/bg/night.jpg",
+    ]
+
+# ASR config
+asr:
+  # funasr config
+  funasr:
+    model: "checkpoints/SenseVoiceSmall" # set your model here
+    vad_model: "fsmn-vad"
+    punc_model: null
+    spk_model: null
+    model_path: null
+    device: "cuda:0"
+    language: "auto"
+    use_itn: True
+    batch_size_s: 60
+    sample_rate: 16000
+    disable_update: False
+
+  # sherpa-onnx config
+  sherpa_onnx:
+    # please refer to the sherpa-onnx_asr.py for more details
+    model_name: "paraformer"
+    paraformer: "checkpoints/sherpa-onnx-paraformer-zh-2024-03-09/model.onnx"
+    tokens: "checkpoints/sherpa-onnx-paraformer-zh-2024-03-09/tokens.txt"
+
+  # whispercpp config
+  whispercpp:
+    model: "base.en"
+    models_dir: "src/asr/models/whispercpp" # set your models dir here
+    params_sampling_strategy: 0
+    language: "en"
+    temperature: 0.0
+    translate: False
+    print_realtime: False
+    print_progress: False
+
+# LLM config
+llm:
+  litellm:
+    model: "ollama/qwen2.5vl:7b" # set your model here
+    base_url: "http://localhost:11434" # set your base url here
+    # api_key: "YOUR_API_KEY" # if you use llm service which need api key, please set the api key here.Else, delete this line
+
+# TTS config
+tts:
+  # fish speech settings
+  fish_speech:
+    api_key: "YOUR_API_KEY" # set your api key here
+    reference_id: "0eb38bc974e1459facca38b359e13511"
+    latency: "normal"
+    format: "wav"
+    backend: "speech-1.5"
+
+  # GPT-SoVits settings
+  gpt_sovits:
+    api_url: "http://127.0.0.1:5000" # set your api url here
+    character: "【原神】八重神子"
+    emotion: "default"
+    text_language: "zh"
+    batch_size: 1
+    speed: 1.0
+
+  # IndexTTS settings
+  index_tts:
+    api_url: "http://127.0.0.1:7860" # set your api url here
+    prompt_audio_path: "index-tts/char-audio-5_1.mp3"
+    infer_mode: "普通推理"
+    max_text_tokens_per_sentence: 120
+    sentences_bucket_max_size: 4
+
+  # MegaTTS settings
+  mega_tts:
+    api_url: "http://127.0.0.1:7929" # set your api url here
+    inp_audio: "MegaTTS3/assets/ayaka.wav"
+    inp_npy: "MegaTTS3/assets/ayaka.npy"
+    infer_timestep: 32
+    p_w: 1.4
+    t_w: 3
+    format: "wav"
+
+  # Sherpa-Onnx settings
+  sherpa_onnx:
+    vits_model: "checkpoints/vits-zh-hf-bronya/bronya.onnx"
+    vits_lexicon: "checkpoints/vits-zh-hf-bronya/lexicon.txt"
+    vits_tokens: "checkpoints/vits-zh-hf-bronya/tokens.txt"
+    vits_dict_dir: "checkpoints/vits-zh-hf-bronya/dict"
+    provider: "cpu"

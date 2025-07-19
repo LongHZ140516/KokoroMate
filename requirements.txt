@@ -1,0 +1,24 @@
+# Core dependencies
+fastapi
+python-multipart
+uvicorn
+pyyaml
+numpy
+librosa
+soundfile
+loguru
+
+# ASR dependencies
+funasr
+sherpa-onnx
+pywhispercpp
+
+# LLM dependencies
+litellm
+
+# TTS dependencies
+fish-audio-sdk
+gradio-client
+
+# HTTP requests
+requests
