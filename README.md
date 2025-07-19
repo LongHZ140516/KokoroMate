@@ -16,7 +16,7 @@
 
 
 ## 📢 Latest Updates
-* **July-20-2025:** 🎉 ${\color{red} First\ KokoroMate \ update!}$
+* **July-19-2025:** 🎉 ${\color{red} First\ KokoroMate \ update!}$
 
 
 ## ✨ Usage
