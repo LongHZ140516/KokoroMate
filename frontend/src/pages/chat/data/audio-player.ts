@@ -14,9 +14,12 @@ export class AudioPlayer {
       
       // 设置音频源
       // 构建完整的音频URL
-      const audioUrl = audioPath.startsWith('http') 
+      const baseUrl = audioPath.startsWith('http') 
         ? audioPath 
         : `http://localhost:8000${audioPath.startsWith('/') ? audioPath : '/' + audioPath}`;
+      
+      // 添加时间戳参数来防止缓存
+      const audioUrl = `${baseUrl}?t=${Date.now()}`;
       
       this.currentAudio.src = audioUrl;
       
